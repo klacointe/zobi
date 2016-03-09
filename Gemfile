@@ -19,4 +19,5 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
 end

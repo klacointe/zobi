@@ -5,7 +5,6 @@ Zobi
 Zobi helps you to orchestrate your controller behaviors using the following gems :
 
 - [**devise**](https://github.com/plataformatec/devise)
-- [**inherited_resources**](https://github.com/josevalim/inherited_resources)
 - [**has_scope**](https://github.com/plataformatec/has_scope)
 - [**kaminari**](https://github.com/amatsuda/kaminari)
 - [**pundit**](https://github.com/elabs/pundit)
@@ -33,20 +32,26 @@ Available modules
 
 ### Inherited
 
-This module uses
-[inherited_resources](https://github.com/josevalim/inherited_resources) gem
-(for version >= 1.4.0).
+This module historically use
+[inherited_resources](https://github.com/josevalim/inherited_resources) gem, which is now deprecated.
 
-This module deals with String Parameters using Parameters classes.
-
-A Parameters inherits from Zobi::ParametersSanitizer, and should define the list
-of parameters and nested parameters to accept.
+Now it only defines create/update/destroy methods to easily build CRUD backend.
 
 If your controller is namespaced, you should define the `resource_type` method to
 override its generic behavior.
 
-If your model is namespaced, you should define the defaults resource_class for
-Inherited Resource, ie : `defaults resource_class: ::User::Address`
+If your model is namespaced, you should define the defaults resource_class:
+
+```
+def resource_class
+::User::Address`
+end
+```
+
+This module also deals with Strong Parameters using Parameters classes.
+
+A Parameters inherits from Zobi::ParametersSanitizer, and should define the list
+of parameters and nested parameters to accept.
 
 Here is an example :
 

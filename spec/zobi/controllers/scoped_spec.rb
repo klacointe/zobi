@@ -12,6 +12,6 @@ describe Scoped::FoosController, type: :controller do
 
   it 'should filter collection' do
     get :index, by_name: 'Hello World'
-    controller.collection.should have(1).items
+    expect(controller.collection).to have(1).items
   end
 end

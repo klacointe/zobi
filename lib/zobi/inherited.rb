@@ -8,14 +8,56 @@ module Zobi
   #
   module Inherited
     def self.included(klass)
-      klass.inherit_resources
-      klass.send('include', Inherited::Hidden)
+      klass.send 'include', Inherited::Hidden
+      klass.send 'respond_to', :html
+    end
+
+    def create
+      r = zobi_resource_class.create permitted_params[zobi_resource_key]
+      instance_variable_set "@#{resource_name}", r
+      args = route_namespace
+      args << r
+      block_given? ? yield(r) : respond_with(*args)
+    end
+    alias_method :create!, :create
+
+    def update
+      resource.update_attributes permitted_params[zobi_resource_key]
+      args = route_namespace
+      args << resource
+      block_given? ? yield(resource) : respond_with(*args)
+    end
+    alias_method :update!, :update
+
+    def destroy
+      resource.destroy
+      block_given? ? yield(resource) : redirect_to(collection_path)
+    end
+    alias_method :destroy!, :destroy
+
+    protected
+
+    def resource
+      r = instance_variable_get "@#{resource_name}"
+      return r if r.present?
+      instance_variable_set(
+        "@#{resource_name}",
+        (params[:id].present? ?
+          resource_class.find(params[:id]) :
+          resource_class.new
+        )
+      )
+      return instance_variable_get "@#{resource_name}"
+    end
+
+    def route_namespace
+      self.class.name.split('::')[0...-1].map(&:downcase)
     end
 
     private
 
     def inherited_collection c
-      end_of_association_chain
+      c
     end
 
     module Hidden

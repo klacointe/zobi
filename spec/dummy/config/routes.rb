@@ -2,7 +2,15 @@
 Dummy::Application.routes.draw do
   devise_for :users
   namespace :inherited do
-    resources :foos
+    resources :foos do
+      collection do
+        post :create_with_block
+      end
+      member do
+        put :update_with_block
+        delete :destroy_with_block
+      end
+    end
   end
   namespace :scoped do
     resources :foos

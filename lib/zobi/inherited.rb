@@ -14,7 +14,7 @@ module Zobi
 
     def create
       r = zobi_resource_class.create permitted_params[zobi_resource_key]
-      instance_variable_set "@#{resource_name}", r
+      instance_variable_set "@#{resource_key}", r
       args = route_namespace
       args << r
       block_given? ? yield(r) : respond_with(*args)
@@ -38,16 +38,16 @@ module Zobi
     protected
 
     def resource
-      r = instance_variable_get "@#{resource_name}"
+      r = instance_variable_get "@#{resource_key}"
       return r if r.present?
       instance_variable_set(
-        "@#{resource_name}",
+        "@#{resource_key}",
         (params[:id].present? ?
           resource_class.find(params[:id]) :
           resource_class.new
         )
       )
-      return instance_variable_get "@#{resource_name}"
+      return instance_variable_get "@#{resource_key}"
     end
 
     def route_namespace

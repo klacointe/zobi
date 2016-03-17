@@ -8,7 +8,7 @@ module Zobi
     def self.included base
       base.send :include, Pundit
       base.class_eval do
-        before_filter :authorize_resource
+        before_action :authorize_resource
 
         def policy_scope scope
           Pundit.policy_scope!(controlled_access_user, scope)

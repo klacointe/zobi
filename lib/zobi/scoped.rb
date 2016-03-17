@@ -6,7 +6,7 @@ module Zobi
   module Scoped
     def self.included(klass)
       klass.helper_method :filters_list
-      klass.before_filter :default_order
+      klass.before_action :default_order
     end
 
     protected

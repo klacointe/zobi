@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version      = Zobi::VERSION
   s.authors      = ['klacointe']
   s.email        = 'kevinlacointe@gmail.com'
-  s.homepage     = 'https://github.com/af83/zobi'
+  s.homepage     = 'https://github.com/klacointe/zobi'
   s.summary      = 'Keep your rails controllers DRY.'
   s.description  = 'Keep your rails controllers DRY while using devise, has_scope, kaminari, pundit and draper'
   s.license      = 'MIT'

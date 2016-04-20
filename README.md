@@ -37,14 +37,14 @@ This module historically use
 
 Now it only defines create/update/destroy methods to easily build CRUD backend.
 
-If your controller is namespaced, you should define the `resource_type` method to
-override its generic behavior.
+If your controller is namespaced, you should define the `zobi_resource_name`
+method to override its generic behavior.
 
-If your model is namespaced, you should define the defaults resource_class:
+If your model is namespaced, you should define the zobi_resource_class:
 
 ```
-def resource_class
-::User::Address`
+def zobi_resource_class
+  ::User::Address`
 end
 ```
 

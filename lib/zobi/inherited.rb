@@ -12,6 +12,12 @@ module Zobi
       klass.send 'respond_to', :html
     end
 
+    def new
+    end
+
+    def edit
+    end
+
     def create
       r = zobi_resource_class.create permitted_params[zobi_resource_key]
       instance_variable_set "@#{resource_key}", r

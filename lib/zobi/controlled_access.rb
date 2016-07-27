@@ -65,12 +65,12 @@ module Zobi
     end
 
     def controlled_access_build_resource
-      return build_resource if respond_to?(:build_resource)
+      return build_resource if self.methods.include?(:build_resource)
       zobi_resource_class.new params[zobi_resource_class.to_s.to_sym]
     end
 
     def controlled_access_resource
-      return resource if respond_to?(:resource)
+      return resource if self.methods.include?(:resource)
       zobi_resource_class.find(params[:id])
     end
   end

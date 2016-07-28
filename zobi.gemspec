@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files        = `git ls-files README.md lib app LICENSE`.split("\n")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
-  s.add_dependency 'rails', '>= 4.0'
+  s.add_dependency 'rails', '~> 5.0'
   s.add_development_dependency 'rspec-rails',       '~>2.14'
   s.add_development_dependency 'sqlite3',           '~>1.3'
   s.add_development_dependency 'rake',              '~>10.1'
